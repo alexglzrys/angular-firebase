@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-horizontal-graph',
   templateUrl: './horizontal-graph.component.html',
   styleUrls: ['./horizontal-graph.component.scss']
 })
-export class HorizontalGraphComponent {
+export class HorizontalGraphComponent implements OnDestroy {
 
   result: any[] = [
     {
@@ -45,9 +45,20 @@ export class HorizontalGraphComponent {
     domain: ['#5AA454', '#C7B42C', '#AAAAAA'], selectable: true, group: ScaleType.Ordinal, name: 'Cistom Usage'
   };*/
   colorScheme = 'nightLights'
+  interval!: any;
 
   constructor() {
-    Object.assign(this, { single: this.result });
+    //Object.assign(this, { single: this.result });
+
+    // Actualizar el gráfico cada segundo y medio
+    this.interval = setInterval(() => {
+      this.updateGraphic();
+      console.log('chart update')
+    }, 1500)
+  }
+  ngOnDestroy(): void {
+    // Limpiar el intervalo para evitar fugas de memoria
+    clearInterval(this.interval);
   }
 
   onSelect(data: any): void {
@@ -60,6 +71,17 @@ export class HorizontalGraphComponent {
 
   onDeactivate(data: any): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  updateGraphic() {
+    // ! ngx-charts dice que para poder actualizar los valores del gráfico, es necesario especificar todo el arreglo con los nuevos valores
+    const newData = [...this.result];
+    // Asignar un valor aleatorio a cada objeto en el arreglo
+    for(let i in newData) {
+      newData[i].value = Math.round(Math.random() * 100);
+    }
+    // Pasar los nuevos valores al arreglo original
+    this.result = [...newData];
   }
 
 }
