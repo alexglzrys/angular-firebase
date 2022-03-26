@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-horizontal-graph',
@@ -7,7 +7,8 @@ import { Component, OnDestroy } from '@angular/core';
 })
 export class HorizontalGraphComponent implements OnDestroy {
 
-  result: any[] = [
+  @Input() result: any[] = [];
+  /*result: any[] = [
     {
       "name": "Juego 1",
       "value": 100
@@ -28,7 +29,7 @@ export class HorizontalGraphComponent implements OnDestroy {
       "name": "Juego 5",
       "value": 41
     }
-  ];
+  ];*/
   //view: [number, number] = [700, 400];
 
   // options
