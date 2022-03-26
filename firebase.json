@@ -1,1 +1,10 @@
-{}
+{
+  "hosting": {
+    "public": "./dist/game-of-the-year",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
