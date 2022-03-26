@@ -45,20 +45,21 @@ export class HorizontalGraphComponent implements OnDestroy {
     domain: ['#5AA454', '#C7B42C', '#AAAAAA'], selectable: true, group: ScaleType.Ordinal, name: 'Cistom Usage'
   };*/
   colorScheme = 'nightLights'
-  interval!: any;
+
+  //interval!: any;
 
   constructor() {
     //Object.assign(this, { single: this.result });
 
     // Actualizar el gráfico cada segundo y medio
-    this.interval = setInterval(() => {
+    /*this.interval = setInterval(() => {
       this.updateGraphic();
       console.log('chart update')
-    }, 1500)
+    }, 1500)*/
   }
   ngOnDestroy(): void {
     // Limpiar el intervalo para evitar fugas de memoria
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
   }
 
   onSelect(data: any): void {
