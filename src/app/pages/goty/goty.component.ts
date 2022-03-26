@@ -35,6 +35,13 @@ export class GotyComponent implements OnInit {
           text: res.message,
           icon: 'success'
         })
+      } else {
+        // Gestionar el error de forma personalizada desde el componente
+        Swal.fire({
+          title: 'Opps',
+          text: res.message,
+          icon: 'error'
+        })
       }
     });
   }

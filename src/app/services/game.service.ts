@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import { environment } from 'src/environments/environment';
 import { Game, VoteGameRequest } from '../shared/interfaces/game';
 
@@ -35,6 +35,13 @@ export class GameService {
   // Votar por el juego seleccionado
   voteGame(id: string): Observable<VoteGameRequest> {
     const URL = `${API_URL}/goty/${id}`;
-    return this.http.post<VoteGameRequest>(URL, {});
+    return this.http.post<VoteGameRequest>(URL, {}).pipe(
+      // gestionar el posible error
+      catchError(err => {
+        console.warn('error en la petición');
+        // Retornamos el error como respuesta para gestionarlo desde la invocación de este método en el componente
+        return of(err.error)
+      })
+    );
   }
 }
