@@ -4,7 +4,7 @@
       <img [src]="game.url" class="card-img-top h-75" style="object-fit: cover;" [alt]="game.name">
       <div class="card-body">
         <h5 class="card-title">{{ game.name }}</h5>
-        <button class="btn btn-sm w-100 btn-outline-primary">Votar</button>
+        <button (click)="voteGame(game.id)" class="btn btn-sm w-100 btn-outline-primary">Votar</button>
       </div>
       <div class="card-footer">
         <small class="text-muted">Votos acumulados: {{ game.votes }}</small>

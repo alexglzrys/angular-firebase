@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap } from "rxjs/operators";
 import { environment } from 'src/environments/environment';
-import { Game } from '../shared/interfaces/game';
+import { Game, VoteGameRequest } from '../shared/interfaces/game';
 
 const API_URL = environment.api;
 
@@ -16,6 +16,7 @@ export class GameService {
 
   constructor(private http: HttpClient) { }
 
+  // Recuperar todos los jeugos registrados en Firestore
   getNominados(): Observable<Game[]> {
     if (this.games.length > 0) {
       // Retornar un observable con los juegos almacenados en la propiedad privada games
@@ -29,5 +30,11 @@ export class GameService {
         tap(games => this.games = games)
       );
     }
+  }
+
+  // Votar por el juego seleccionado
+  voteGame(id: string): Observable<VoteGameRequest> {
+    const URL = `${API_URL}/goty/${id}`;
+    return this.http.post<VoteGameRequest>(URL, {});
   }
 }
