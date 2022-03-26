@@ -1,1 +1,14 @@
-<p>goty works!</p>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col"  *ngFor="let game of games">
+    <div  class="card h-100 bg-dark">
+      <img [src]="game.url" class="card-img-top h-75" style="object-fit: cover;" [alt]="game.name">
+      <div class="card-body">
+        <h5 class="card-title">{{ game.name }}</h5>
+        <button class="btn btn-sm w-100 btn-outline-primary">Votar</button>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Votos acumulados: {{ game.votes }}</small>
+      </div>
+    </div>
+  </div>
+</div>
